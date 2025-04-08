@@ -1,6 +1,6 @@
 # Notchz
 
-Is two in one safe area node that set offsets by member or automatic set from cutout areas to ensure fit within safe area. It's useful for build mobile games or apps.
+Is safe area node that set offsets by member or automatic set from cutout areas to ensure fit within safe area. It's useful for build mobile games or apps.
 
 ## Usage
 
