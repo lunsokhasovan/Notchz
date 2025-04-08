@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 
 window/handheld/orientation=6
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Notchz/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

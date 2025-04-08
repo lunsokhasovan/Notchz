@@ -1,4 +1,5 @@
 ## Safe area node and automatic set from cutouts
+@icon("./Notchz.svg")
 @tool
 class_name Notchz
 extends Control
