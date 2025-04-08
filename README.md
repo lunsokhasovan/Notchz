@@ -1,3 +1,7 @@
 # Notchz
 
-Notchz is safe area node that set offsets by player or automatic set from cutouts that fit in safe area without cutout area.
+Is two in one safe area node that set offsets by member or automatic set from cutouts that fit in safe area without cutout area. It's useful for build mobile games.
+
+## Usage
+
+Just create Notchz as root node or as main UI.
