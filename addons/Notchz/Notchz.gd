@@ -17,22 +17,34 @@ enum SET_FROM_CUTOUTS_MODE{
 ## Set left offset
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var left: int = 0:
-	set(x): left = max(0, x); curret_offsets[0] = left
+	set(x):
+		left = max(0, x)
+		curret_offsets[0] = left
+		refresh()
 
 ## Set top offset
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var top: int = 0:
-	set(x): top = max(0, x); curret_offsets[1] = top
+	set(x):
+		top = max(0, x)
+		curret_offsets[1] = top
+		refresh()
 
 ## Set right offset
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var right: int = 0:
-	set(x): right = max(0, x); curret_offsets[2] = right
+	set(x):
+		right = max(0, x)
+		curret_offsets[2] = right
+		refresh()
 
 ## Set buttom offset
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var buttom: int = 0:
-	set(x): buttom = max(0, x); curret_offsets[3] = buttom
+	set(x):
+		buttom = max(0, x)
+		curret_offsets[3] = buttom
+		refresh()
 
 ## Property for set from cutouts (refresh method). Can set here by contain [left, top, right, buttom].
 @onready var curret_offsets: Array = [left,top,right,buttom]:
