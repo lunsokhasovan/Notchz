@@ -1,20 +1,24 @@
-## Safe area node and automatic set from cutouts
 @icon("./Notchz.svg")
 @tool
 class_name Notchz
 extends Control
 
+## Safe area node and automatic set from cutouts
+##
+## Is safe area node that set offsets by member or automatic set from cutout areas to ensure fit within safe area. 
+## It's useful for build fullscreen mobile games or apps.
+
 enum SET_FROM_CUTOUTS_MODE{
 	OFF, ## Never set by automatically
-	ONCE, ## Set once by node is ready
+	ONCE, ## Set once when node is ready
 	ALWAYS, ## Always set by automatically
 }
-## Set offsets from cutouts by mode
+## Set offsets from cutouts by mode.
 @export var set_from_cutouts: SET_FROM_CUTOUTS_MODE = 2
 
 @export_group("Offsets")
 
-## Set left offset
+## Set left offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var left: int = 0:
 	set(x):
@@ -22,7 +26,7 @@ var left: int = 0:
 		curret_offsets[0] = left
 		refresh()
 
-## Set top offset
+## Set top offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var top: int = 0:
 	set(x):
@@ -30,7 +34,7 @@ var top: int = 0:
 		curret_offsets[1] = top
 		refresh()
 
-## Set right offset
+## Set right offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var right: int = 0:
 	set(x):
@@ -38,7 +42,7 @@ var right: int = 0:
 		curret_offsets[2] = right
 		refresh()
 
-## Set buttom offset
+## Set buttom offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
 var buttom: int = 0:
 	set(x):
@@ -46,8 +50,10 @@ var buttom: int = 0:
 		curret_offsets[3] = buttom
 		refresh()
 
-## Property for set from cutouts (refresh method). Can set here by contain [left, top, right, buttom].
-@onready var curret_offsets: Array = [left,top,right,buttom]:
+## Property for set base [Control]'s offsets.
+## Can set by contain [left, top, right, buttom].
+## @experimental: It may be private in future version.
+@onready var curret_offsets: Array = [left, top, right, buttom]:
 	set(x):
 		curret_offsets.resize(3)
 		curret_offsets = x
@@ -75,9 +81,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warning
 
 func _process(delta: float) -> void:
-	if set_from_cutouts == 2: refresh()
+	if set_from_cutouts == 2:
+		refresh()
 
-## Method for set offsets
+## Method for set offsets.
 func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 	
 	var new_offsets = [left,top,right,buttom]
@@ -102,7 +109,7 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 					var re = DisplayServer.window_get_size().x - cutout.position.x
 					if re > new_offsets[2]:
 						new_offsets[2] = re
-			
+			# When screen is portrail
 			else:
 				if cutout.position.y >= DisplayServer.window_get_size().y / 3 and cutout.end.y <= DisplayServer.window_get_size().y / 3 * 2:
 					if cutout.end.x < DisplayServer.window_get_size().x / 2:

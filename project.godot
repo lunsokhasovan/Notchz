@@ -11,11 +11,13 @@ config_version=5
 [application]
 
 config/name="Notchz (Safe Area)"
+config/version="1.1"
 run/main_scene="res://test/test.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [display]
 
+window/size/mode=3
 window/handheld/orientation=6
 
 [editor_plugins]
