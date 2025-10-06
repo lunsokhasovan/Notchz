@@ -14,6 +14,7 @@ config/name="Notchz (Safe Area)"
 config/version="1.1"
 run/main_scene="res://test/test.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+config/icon="uid://dw1020obtnay3"
 
 [display]
 
