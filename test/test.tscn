@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdugp8m2eyjj0"]
 
-[ext_resource type="Script" uid="uid://cworsm3rkwqgt" path="res://addons/Notchz/Notchz.gd" id="1_syuel"]
+[ext_resource type="Script" uid="uid://bj3o584uhcev2" path="res://addons/Notchz/Notchz.gd" id="1_syuel"]
 
 [node name="Main" type="Node"]
 
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_syuel")
-metadata/_custom_type_script = "uid://cworsm3rkwqgt"
+metadata/_custom_type_script = "uid://bj3o584uhcev2"
 
 [node name="Panel" type="Panel" parent="Notchz"]
 layout_mode = 1
