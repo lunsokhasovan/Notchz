@@ -23,6 +23,8 @@ jobs:
           mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          # Godot 4.5 requirement
+          sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35" "cmdline-tools;latest" "cmake;3.22.1" "ndk;28.1.13356709"
       - name: Build
         run: |
           mkdir -v -p build/android
