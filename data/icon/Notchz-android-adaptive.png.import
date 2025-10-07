@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj0h54t7jfviv"
-path="res://.godot/imported/Notchz.png-f69e6dbc930c083663925612d64fd1dc.ctex"
+uid="uid://dkwegnjpl5vjn"
+path="res://.godot/imported/Notchz-android-adaptive.png-cae2fc4a23817c98df3c78138d4e668a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Notchz.png"
-dest_files=["res://.godot/imported/Notchz.png-f69e6dbc930c083663925612d64fd1dc.ctex"]
+source_file="res://Notchz-android-adaptive.png"
+dest_files=["res://.godot/imported/Notchz-android-adaptive.png-cae2fc4a23817c98df3c78138d4e668a.ctex"]
 
 [params]
 
