@@ -7,7 +7,7 @@ env:
   PROJECT_PATH: .
 
 jobs:
-  export-windows:
+  export-android:
     name: Android Export
     runs-on: ubuntu-24.04
     container:
@@ -28,9 +28,6 @@ jobs:
       - name: Setup import resources
         run: |
           cd $PROJECT_PATH
-          # Ripping plugin files, solve regular later
-          rm addons/Notchz/plugin.cfg
-          rm addons/Notchz/plugin.gd
           godot --headless --verbose --import
       - name: Build
         run: |
