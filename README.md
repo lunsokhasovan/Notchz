@@ -5,8 +5,12 @@ It's useful for build fullscreen mobile games or apps.
 
 ## Usage
 
-Just create Notchz as root node or add as a main UI.
+Just create Notchz as root node or add as a main UI. Or checkout Notchz Demo first at below
 
-## Note
+## Notchz Demo
 
-If device has weird camera cutout layout or you're not sure about it's worked, try create test project, export it and test it on mobile device.
+<img width="1600" height="720" alt="image" src="https://github.com/user-attachments/assets/c14bc6e8-1afe-4130-b4e5-bbf5086bef17" />
+
+A app that test your phone's cutouts (Android only). [Click here](https://github.com/lunsokhasovan/Notchz/releases) to download.
+
+To test it, notice about dark green is cutouts area then make sure rotate phone if it's working. if doesn't, feel free to create issue.
