@@ -28,17 +28,9 @@ jobs:
       - name: Setup import resources
         run: |
           cd $PROJECT_PATH
+          cp project.godot project.godot.backup # Backup config before Godot modified
           godot --headless --verbose --import
-          # Setup Bash .ini parser
-          cd -
-          apt-get install -y --no-install-recommends bash
-          wget https://raw.githubusercontent.com/lsferreira42/bash-ini-parser/main/lib_ini.sh
-          # Write project.godot to enable plugins
-          bash -c """
-            source lib_ini.sh
-            ini_add_section "$PROJECT_PATH/project.godot" "editor_plugins"
-            ini_write "$PROJECT_PATH/project.godot" "editor_plugins" "enabled" 'PackedStringArray("res://addons/Notchz/plugin.cfg")'
-          """
+          mv --force project.godot.backup project.godot # Restore config
       - name: Build
         run: |
           mkdir -v -p build/android
