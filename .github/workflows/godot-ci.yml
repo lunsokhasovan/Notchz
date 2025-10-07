@@ -28,9 +28,10 @@ jobs:
       - name: Setup import resources
         run: |
           cd $PROJECT_PATH
-          cp project.godot project.godot.backup # Backup config before Godot modified
+          # Ripping plugin files, solve regular later
+          rm addons/Notchz/plugin.cfg
+          rm addons/Notchz/plugin.gd
           godot --headless --verbose --import
-          mv --force project.godot.backup project.godot # Restore config
       - name: Build
         run: |
           mkdir -v -p build/android
