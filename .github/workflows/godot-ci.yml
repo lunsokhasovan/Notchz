@@ -25,6 +25,8 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           # Update Godot 4.5 requirements'
           sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35" "cmdline-tools;latest" "cmake;3.22.1" "ndk;28.1.13356709"
+          # Godot install Android build template
+          godot --headless --verbose --install-android-build-template
       - name: Setup import resources
         run: |
           cd $PROJECT_PATH
