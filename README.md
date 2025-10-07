@@ -13,4 +13,4 @@ Just create Notchz as root node or add as a main UI. Or checkout Notchz Demo fir
 
 A app that test your phone's cutouts (Android only). [Click here](https://github.com/lunsokhasovan/Notchz/releases) to download.
 
-To test it, notice about dark green is cutouts area then make sure rotate phone if it's working. if doesn't, feel free to create issue.
+To test it, notice about dark green is cutouts area and make sure rotate phone if it's working. if doesn't, feel free to create issue.
