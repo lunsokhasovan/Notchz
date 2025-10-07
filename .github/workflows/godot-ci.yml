@@ -1,4 +1,4 @@
-name: "godot-ci export"
+name: "Godot debug exports"
 on: [push, pull_request]
 
 env:
@@ -23,8 +23,18 @@ jobs:
           mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          # Godot 4.5 requirement
+          # Update Godot 4.5 requirements'
           sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35" "cmdline-tools;latest" "cmake;3.22.1" "ndk;28.1.13356709"
+      - name: Setup import resources
+        run: |
+          cd $PROJECT_PATH
+          godot --headless --verbose --import
+          # Setup Bash .ini parser
+          cd -
+          curl -o lib_ini.sh https://raw.githubusercontent.com/lsferreira42/bash-ini-parser/main/lib_ini.sh
+          source lib_ini.sh
+          # Write project.godot to enable plugins
+          ini_write "$PROJECT_PATH/project.godot" "editor_plugins" "enabled" 'PackedStringArray("res://addons/Notchz/plugin.cfg")'
       - name: Build
         run: |
           mkdir -v -p build/android
