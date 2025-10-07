@@ -1,0 +1,42 @@
+name: "Godot release exports"
+on: [push, pull_request]
+
+env:
+  GODOT_VERSION: 4.5
+  EXPORT_NAME: Notchz
+  PROJECT_PATH: .
+
+jobs:
+  export-android:
+    name: Android Export
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          # Update Godot 4.5 requirements'
+          sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35" "cmdline-tools;latest" "cmake;3.22.1" "ndk;28.1.13356709"
+      - name: Setup import resources
+        run: |
+          cd $PROJECT_PATH
+          godot --headless --verbose --import
+      - name: Build
+        run: |
+          mkdir -v -p build/android
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Android" "$EXPORT_DIR/android/$EXPORT_NAME.apk"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: build/android
