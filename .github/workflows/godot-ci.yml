@@ -31,11 +31,13 @@ jobs:
           godot --headless --verbose --import
           # Setup Bash .ini parser
           cd -
-          apt-get install -y --no-install-recommends source
+          apt-get install -y --no-install-recommends bash
           wget https://raw.githubusercontent.com/lsferreira42/bash-ini-parser/main/lib_ini.sh
-          source lib_ini.sh
           # Write project.godot to enable plugins
-          ini_write "$PROJECT_PATH/project.godot" "editor_plugins" "enabled" 'PackedStringArray("res://addons/Notchz/plugin.cfg")'
+          bash -c """
+            source lib_ini.sh
+            ini_write "$PROJECT_PATH/project.godot" "editor_plugins" "enabled" 'PackedStringArray("res://addons/Notchz/plugin.cfg")'
+          """
       - name: Build
         run: |
           mkdir -v -p build/android
