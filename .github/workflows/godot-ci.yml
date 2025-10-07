@@ -10,6 +10,8 @@ jobs:
   export-android:
     name: Android Export
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     container:
       image: barichello/godot-ci:4.5
     steps:
