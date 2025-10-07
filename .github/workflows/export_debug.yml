@@ -18,7 +18,7 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       with:
-        packages: 'tools platform-tools platforms cmdline-tools cmake build-tools ndk'
+        packages: 'tools platform-tools platforms;android-35 cmdline-tools;latest cmake;3.22.1 build-tools;35.0.0 ndk;28.1.13356709'
     - name: Build
       id  : export
       uses: firebelley/godot-export@v7.0.0
