@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqri70s3wm585"
-path="res://.godot/imported/Notchz-android-adaptive.svg-ea93cdc5ce76042532d267eb8222cff1.ctex"
+uid="uid://csmtt28r587ct"
+path="res://.godot/imported/normal.png-149b9423427a5505277e7c9ad1340e02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Notchz-android-adaptive.svg"
-dest_files=["res://.godot/imported/Notchz-android-adaptive.svg-ea93cdc5ce76042532d267eb8222cff1.ctex"]
+source_file="res://data/android_icons/normal.png"
+dest_files=["res://.godot/imported/normal.png-149b9423427a5505277e7c9ad1340e02.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

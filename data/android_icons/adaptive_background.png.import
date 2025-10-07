@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csmtt28r587ct"
-path="res://.godot/imported/Notchz-192.png-9c09ea603dfb7e895a9243be5bbfbad9.ctex"
+uid="uid://ba5to01ofwd7g"
+path="res://.godot/imported/adaptive_background.png-03ddf650dd74b2aa660818e825e36251.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Notchz-192.png"
-dest_files=["res://.godot/imported/Notchz-192.png-9c09ea603dfb7e895a9243be5bbfbad9.ctex"]
+source_file="res://data/android_icons/adaptive_background.png"
+dest_files=["res://.godot/imported/adaptive_background.png-03ddf650dd74b2aa660818e825e36251.ctex"]
 
 [params]
 
