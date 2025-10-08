@@ -72,7 +72,7 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
 func _ready() -> void:
-	refresh(true)
+	refresh()
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warning = []
@@ -92,8 +92,8 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 	
 	if !Engine.is_editor_hint() and able_set_from_cutout:
 		for cutout in cutouts:
-			# When screen is landscape
-			if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y:
+			# When screen is landscape and it not for macOS
+			if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y and not (OS.get_name() == "macOS"):
 				if cutout.position.x >= DisplayServer.window_get_size().x / 3 and cutout.end.x <= DisplayServer.window_get_size().x / 3 * 2:
 					if cutout.end.y < DisplayServer.window_get_size().y / 2:
 						if cutout.end.y > new_offsets[1]:
