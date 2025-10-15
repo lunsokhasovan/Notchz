@@ -23,7 +23,7 @@ enum SET_FROM_CUTOUTS_MODE{
 var left: int = 0:
 	set(x):
 		left = max(0, x)
-		curret_offsets[0] = left
+		_curret_offsets[0] = left
 		refresh()
 
 ## Set top offset if more than automatic set from cutouts.
@@ -31,7 +31,7 @@ var left: int = 0:
 var top: int = 0:
 	set(x):
 		top = max(0, x)
-		curret_offsets[1] = top
+		_curret_offsets[1] = top
 		refresh()
 
 ## Set right offset if more than automatic set from cutouts.
@@ -39,7 +39,7 @@ var top: int = 0:
 var right: int = 0:
 	set(x):
 		right = max(0, x)
-		curret_offsets[2] = right
+		_curret_offsets[2] = right
 		refresh()
 
 ## Set buttom offset if more than automatic set from cutouts.
@@ -47,20 +47,22 @@ var right: int = 0:
 var buttom: int = 0:
 	set(x):
 		buttom = max(0, x)
-		curret_offsets[3] = buttom
+		_curret_offsets[3] = buttom
 		refresh()
 
 ## Property for set base [Control]'s offsets.
 ## Can set by contain [left, top, right, buttom].
-## @experimental: It may be private in future version.
-@onready var curret_offsets: Array = [left, top, right, buttom]:
+## @deprecated: It was to be private. Old property is unusable.
+@onready var curret_offsets: Array = [left, top, right, buttom]
+
+@onready var _curret_offsets: Array = [left, top, right, buttom]:
 	set(x):
-		curret_offsets.resize(3)
-		curret_offsets = x
-		offset_left = curret_offsets[0]
-		offset_top = curret_offsets[1]
-		offset_right = -curret_offsets[2]
-		offset_bottom = -curret_offsets[3]
+		_curret_offsets.resize(3)
+		_curret_offsets = x
+		offset_left = _curret_offsets[0]
+		offset_top = _curret_offsets[1]
+		offset_right = - _curret_offsets[2]
+		offset_bottom = - _curret_offsets[3]
 
 func _init() -> void:
 	layout_mode = 1
@@ -127,4 +129,4 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 					if re > new_offsets[3]:
 						new_offsets[3] = re
 	
-	curret_offsets = new_offsets
+	_curret_offsets = new_offsets
