@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Notchz (Safe Area)"
-config/version="1.1"
+config/description="Safe area node and automatic set from cutouts"
+config/version="1.2"
 run/main_scene="res://test/test.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://csmtt28r587ct"
