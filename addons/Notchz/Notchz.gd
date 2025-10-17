@@ -5,7 +5,8 @@ extends Control
 
 ## Safe area node and automatic set from cutouts
 ##
-## Is safe area node that set offsets by member or automatic set from cutout areas to ensure fit within safe area. 
+## Is safe area node that set offsets by member or
+## automatic set from cutout areas to ensure fit within safe area. 
 ## It's useful for build fullscreen mobile games or apps.
 
 enum EXTERNAL_CUTOUTS_PROFILE {
@@ -57,7 +58,9 @@ var buttom: float = 0:
 
 @export_group("External Cutouts")
 
-@export var external_cutouts_profile: EXTERNAL_CUTOUTS_PROFILE = EXTERNAL_CUTOUTS_PROFILE.NONE
+@export
+var external_cutouts_profile: EXTERNAL_CUTOUTS_PROFILE \
+	= EXTERNAL_CUTOUTS_PROFILE.NONE
 
 @export var custom_cutouts: Array[Rect2] = []
 
@@ -85,7 +88,7 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
 func _ready() -> void:
-	refresh()
+	refresh(true if set_from_cutouts > 0 else false)
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warning = []
@@ -94,13 +97,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warning
 
 func _process(delta: float) -> void:
-	if set_from_cutouts == 2:
-		refresh()
+	if set_from_cutouts == SET_FROM_CUTOUTS_MODE.ALWAYS:
+		refresh(true)
 
 ## Method for set offsets.
-func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
+func refresh(able_set_from_cutout: bool = false) -> void:
 	
-	var new_offsets = [left,top,right,buttom]
+	var new_offsets = [left, top, right, buttom]
 	var cutouts: Array[Rect2] = (
 		DisplayServer.get_display_cutouts()
 		+ custom_cutouts
@@ -109,9 +112,10 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 	
 	if !Engine.is_editor_hint() and able_set_from_cutout:
 		for cutout in cutouts:
-			# When screen is landscape and it not for macOS
-			if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y and not (OS.get_name() == "macOS"):
-				if cutout.position.x >= DisplayServer.window_get_size().x / 3 and cutout.end.x <= DisplayServer.window_get_size().x / 3 * 2:
+			# When screen is landscape and not for macOS
+			if _is_screen_landscape() and not (OS.get_name() == "macOS"):
+				if cutout.position.x >= DisplayServer.window_get_size().x / 3 \
+				and cutout.end.x <= DisplayServer.window_get_size().x / 3 * 2:
 					if cutout.end.y < DisplayServer.window_get_size().y / 2:
 						if cutout.end.y > new_offsets[1]:
 							new_offsets[1] = cutout.end.y
@@ -128,7 +132,8 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 						new_offsets[2] = re
 			# When screen is portrail
 			else:
-				if cutout.position.y >= DisplayServer.window_get_size().y / 3 and cutout.end.y <= DisplayServer.window_get_size().y / 3 * 2:
+				if cutout.position.y >= DisplayServer.window_get_size().y / 3 \
+				and cutout.end.y <= DisplayServer.window_get_size().y / 3 * 2:
 					if cutout.end.x < DisplayServer.window_get_size().x / 2:
 						if cutout.end.x > new_offsets[0]:
 							new_offsets[0] = cutout.end.x
@@ -163,3 +168,6 @@ func get_external_cutout(
 			)]
 		_:
 			return []
+
+func _is_screen_landscape() -> bool:
+	return DisplayServer.window_get_size().x > DisplayServer.window_get_size().y
