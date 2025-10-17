@@ -8,7 +8,12 @@ extends Control
 ## Is safe area node that set offsets by member or automatic set from cutout areas to ensure fit within safe area. 
 ## It's useful for build fullscreen mobile games or apps.
 
-enum SET_FROM_CUTOUTS_MODE{
+enum EXTERNAL_CUTOUTS_PROFILE {
+	NONE,
+	TOP_NOTCH,
+}
+
+enum SET_FROM_CUTOUTS_MODE {
 	OFF, ## Never set by automatically
 	ONCE, ## Set once when node is ready
 	ALWAYS, ## Always set by automatically
@@ -20,42 +25,48 @@ enum SET_FROM_CUTOUTS_MODE{
 
 ## Set left offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
-var left: int = 0:
+var left: float = 0:
 	set(x):
-		left = max(0, x)
+		left = maxf(0, x)
 		_curret_offsets[0] = left
 		refresh()
 
 ## Set top offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
-var top: int = 0:
+var top: float = 0:
 	set(x):
-		top = max(0, x)
+		top = maxf(0, x)
 		_curret_offsets[1] = top
 		refresh()
 
 ## Set right offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
-var right: int = 0:
+var right: float = 0:
 	set(x):
-		right = max(0, x)
+		right = maxf(0, x)
 		_curret_offsets[2] = right
 		refresh()
 
 ## Set buttom offset if more than automatic set from cutouts.
 @export_custom(PROPERTY_HINT_NONE, "suffix:px")
-var buttom: int = 0:
+var buttom: float = 0:
 	set(x):
-		buttom = max(0, x)
+		buttom = maxf(0, x)
 		_curret_offsets[3] = buttom
 		refresh()
+
+@export_group("External Cutouts")
+
+@export var external_cutouts_profile: EXTERNAL_CUTOUTS_PROFILE = EXTERNAL_CUTOUTS_PROFILE.NONE
+
+@export var custom_cutouts: Array[Rect2] = []
 
 ## Property for set base [Control]'s offsets.
 ## Can set by contain [left, top, right, buttom].
 ## @deprecated: It was to be private. Old property is unusable.
 @onready var curret_offsets: Array = [left, top, right, buttom]
 
-@onready var _curret_offsets: Array = [left, top, right, buttom]:
+var _curret_offsets: Array = [0, 0, 0, 0]:
 	set(x):
 		_curret_offsets.resize(3)
 		_curret_offsets = x
@@ -90,7 +101,11 @@ func _process(delta: float) -> void:
 func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 	
 	var new_offsets = [left,top,right,buttom]
-	var cutouts: Array[Rect2] = DisplayServer.get_display_cutouts()
+	var cutouts: Array[Rect2] = (
+		DisplayServer.get_display_cutouts()
+		+ custom_cutouts
+		+ get_external_cutout()
+	)
 	
 	if !Engine.is_editor_hint() and able_set_from_cutout:
 		for cutout in cutouts:
@@ -130,3 +145,21 @@ func refresh(able_set_from_cutout: bool = (set_from_cutouts > 1)) -> void:
 						new_offsets[3] = re
 	
 	_curret_offsets = new_offsets
+	
+func get_external_cutout(
+	profile: EXTERNAL_CUTOUTS_PROFILE = external_cutouts_profile
+) -> Array[Rect2]:
+	match profile:
+		EXTERNAL_CUTOUTS_PROFILE.TOP_NOTCH:
+			var notch_lenght: float = DisplayServer.window_get_size().y / 20
+			return [Rect2(
+				# Position
+				Vector2(
+					(DisplayServer.window_get_size().x - notch_lenght) / 2,
+					0,
+				),
+				# Size
+				Vector2(notch_lenght * 3, notch_lenght)
+			)]
+		_:
+			return []
